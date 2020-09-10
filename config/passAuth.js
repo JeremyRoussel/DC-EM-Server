@@ -15,7 +15,7 @@ var db = require('knex')({
     client: 'pg',
     connection: {
       host : HOST,
-      user : USER,
+      user : "eevaxebn",
       password : PASSWORD,
       database : DATABASE
     }

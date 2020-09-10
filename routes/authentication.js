@@ -14,7 +14,7 @@ var db = require('knex')({
     client: 'pg',
     connection: {
       host : HOST,
-      user : USER,
+      user : "eevaxebn",
       password : PASSWORD,
       database : DATABASE
     }
@@ -28,7 +28,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 let passport = require('passport')
 
-let passportService = require('../config/passAuth.js')
+require('../config/passAuth.js')
 
 let requireSignin = passport.authenticate('local', {session: false})
 
