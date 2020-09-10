@@ -28,7 +28,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 let passport = require('passport')
 
-let passportService = require('../config/passAuth.js')
+require('../config/passAuth.js')
 
 let requireSignin = passport.authenticate('local', {session: false})
 
@@ -46,12 +46,16 @@ router.get('/', requireAuth, (req, res) => {
     res.send('Hello, You are logged-in')
 })
 
-router.post('/signin', requireSignin, (req, res) => {
+router.post('/signin', requireSignin, async (req, res) => {
     // need to handle bcrypt error, password !match, password success, database error
 
 
     // Success case
-    res.json({token: token(req.user)})
+    console.log(req.user)
+    let tokenString = await token(req.user)
+    // console.log(req.user.id)
+    // console.log(JSON.stringify({token: token, userID: req.user.id}))
+    res.json({token: tokenString, userID: req.user.id})
 })
 
 router.post('/signup', (req, res) => {
@@ -71,7 +75,7 @@ router.post('/signup', (req, res) => {
                     .then(user => {
                           
                         //on success, return json web token
-                        return res.json({token: token(user)})
+                        return res.json({token: token(user), userID: user.id})
 
                     })
                     .catch(err => {

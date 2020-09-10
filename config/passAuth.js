@@ -72,7 +72,7 @@ let localLogin = new LocalStrategy(options, (email, password, done) => {
                         return done(null, false)
                     }
                     // pass back user object
-                    return done(null, true)
+                    return done(null, user)
                 })
             }
             else {
