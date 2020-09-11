@@ -47,15 +47,15 @@ router.get('/', requireAuth, (req, res) => {
 })
 
 router.post('/signin', requireSignin, async (req, res) => {
-    // need to handle bcrypt error, password !match, password success, database error
-
 
     // Success case
-    console.log(req.user)
+    // console.log(req.user)
+    
     let tokenString = await token(req.user)
-    // console.log(req.user.id)
-    // console.log(JSON.stringify({token: token, userID: req.user.id}))
-    res.json({token: tokenString, userID: req.user.id})
+
+    let contacts = await db('contacts').where({user_id: req.user.id}).returning('*')
+
+    res.json({token: tokenString, userID: req.user.id, contacts: contacts})
 })
 
 router.post('/signup', (req, res) => {
