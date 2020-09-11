@@ -20,7 +20,8 @@ const corsOptions = {
 }
 
 app.use(helmet())  // modifies headers to prevent attacks
-app.use(cors(corsOptions))  // access control by requesting page
+// app.use(cors(corsOptions))  // access control by requesting page
+app.use(cors())  // access control by requesting page
 app.use(morgan('combined')) // use 'tiny' or 'combined'
 
 const PORT = process.env.PORT || 3001
@@ -31,6 +32,7 @@ app.get('/hello', (req, res) => {
     res.send('Hello')
 })
 
+app.use(require('./routes/contacts'))
 
 app.listen(PORT || 3001, () => {
     console.log(`listening on port: ${PORT}`)

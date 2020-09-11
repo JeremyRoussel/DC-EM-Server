@@ -29,12 +29,14 @@ let jwtOptions = {
 let jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
 
     //payload has object with keys of 'sub' and ''
-    db('users').where({id: payload.sub})
+    db('users').where({id: payload.sub}).returning('*')
         .then(foundUser => {
 
             // if user is found
             if(foundUser){
-                done(null, foundUser)
+                let user = foundUser[0]
+                console.log('foundUser: ', user)
+                done(null, user)
             }
             // incorrect token
             else {
