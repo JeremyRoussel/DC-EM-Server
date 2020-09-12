@@ -25,7 +25,7 @@ var db = require('knex')({
 let bodyParser = require('body-parser');
 let bcrypt = require('bcryptjs');
 
-router.use(bodyParser.join());
+router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: false}));
 
 
