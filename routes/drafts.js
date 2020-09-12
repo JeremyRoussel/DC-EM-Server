@@ -15,7 +15,7 @@ var db = require('knex')({
     connection: {
         host: HOST,
         // MIGHT NEED TO CHANGE THIS ONE TO HARD-CODE!!! ***********************
-        user: USER,
+        user: "eevaxebn",
         password: PASSWORD,
         database: DATABASE
     }
