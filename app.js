@@ -33,6 +33,8 @@ app.get('/hello', (req, res) => {
 })
 
 app.use(require('./routes/contacts'))
+app.use(require('./routes/drafts'))
+app.use(require('./routes/sent'))
 
 app.listen(PORT || 3001, () => {
     console.log(`listening on port: ${PORT}`)

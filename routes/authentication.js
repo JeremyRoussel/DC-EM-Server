@@ -54,8 +54,10 @@ router.post('/signin', requireSignin, async (req, res) => {
     let tokenString = await token(req.user)
 
     let contacts = await db('contacts').where({user_id: req.user.id}).returning('*')
+    let drafts = await db('drafts').where({user_id: req.user.id}).returning('*')
+    let sent = await db('sent').where({user_id: req.user.id}).returning('*')
 
-    res.json({token: tokenString, userID: req.user.id, contacts: contacts})
+    res.json({token: tokenString, userID: req.user.id, contacts: contacts, drafts: drafts, sent: sent})
 })
 
 router.post('/signup', (req, res) => {
