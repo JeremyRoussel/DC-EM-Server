@@ -63,7 +63,15 @@ router.post('/contacts', requireAuth, (req, res) => {
     // console.log(`Contacts - Post request, logged-in as: ${req.user.email}`)
     
     // insert
-    let {email, group, hobbies, first_Name, last_Name, phone} = {...req.body.contact}
+    // let {email, group, hobbies, first_Name, last_Name, phone} = {...req.body.contact}
+
+    let email = req.body.email
+    let group = req.body.group
+    let hobbies = req.body.hobbies
+    let first_Name = req.body.first_Name
+    let last_Name = req.body.last_Name
+    let phone = req.body.phone
+
     db('contacts').insert({user_id, email, group, hobbies, first_Name, last_Name, phone}).returning('*')
         .then(record => {
 
