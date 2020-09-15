@@ -40,7 +40,7 @@ let requireAuth = passport.authenticate('jwt', {session: false});
 router.get('/drafts', requireAuth, (req, res) =>{
 
     let userID = req.user.id;
-    console.log(`Making a get request to DRAFTS as ${req.user.email}`);
+    console.log(`Making a get request to DRAFTS as ${req.user.email}, id: ${req.user.id}`);
 
     db('drafts').where({user_id: userID}).returning('*')
     .then(drafts =>{
@@ -53,14 +53,6 @@ router.get('/drafts', requireAuth, (req, res) =>{
 })
 
 router.post('/drafts', requireAuth, (req, res) =>{
-
-    console.log("made past requireAuth");
-    console.log(`User is: ${req.user}`);
-
-    // Do we need this??? *******************************************
-    // Object.keys(req).forEach(key =>{
-    //     console.log(key)
-    // });
 
     let user_id = req.user.id;
 
@@ -77,5 +69,29 @@ router.post('/drafts', requireAuth, (req, res) =>{
         res.status(433).send({error: "Could not add draft"})
     })
 })
+
+router.put('/drafts', requireAuth, (req, res) =>{
+
+    let userID = req.user.id
+
+    let title = req.body.drafts.title
+    let body = req.body.drafts.body
+    let group = req.body.drafts.group
+    let id = req.body.drafts.postID
+
+    // console.log(title, body, group, id)
+    // console.log(Sid)
+
+    // update({userID: userID, title: title, body: body, group: group}).
+    db('drafts').where({id}).update({title, body, group}).returning('*')
+    .then(record =>{
+        console.log(record)
+        res.json(record)
+    })
+    .catch(error =>{
+        res.status(433).send({error: "Could not update draft"})
+    })
+})
+
 
 module.exports = router;
