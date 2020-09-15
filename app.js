@@ -5,6 +5,8 @@ const cors = require('cors')  // allows/disallows cross-site communication
 const morgan = require('morgan') // logs requests
 const jwt = require('jwt-simple')
 const nodemailer = require('nodemailer');
+const nodemailerSendgrid = require('nodemailer-sendgrid');
+import (REACT_APP_SENDGRID_KEY);
 
 
 const app = express()
@@ -38,9 +40,6 @@ app.use(require('./routes/contacts'))
 app.use(require('./routes/drafts'))
 app.use(require('./routes/sent'))
 
-
-
-
 // const nodemailerSendgrid = require('nodemailer-sendgrid');
 const transporter = nodemailer.createTransport({
   pool: true,
@@ -49,7 +48,7 @@ const transporter = nodemailer.createTransport({
   secure: true, // use TLS
   auth: {
     user: "apikey",
-    pass: "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"
+    pass: process.env.REACT_APP_SENDGRID_KEY
   }
 });
 
