@@ -64,8 +64,11 @@ router.post('/drafts', requireAuth, (req, res) =>{
 
     let user_id = req.user.id;
 
-    let {title, body} = {...req.body.drafts};
-    db('drafts').insert({user_id, title, body}).returning('*')
+    let title = req.body.drafts.title
+    let body = req.body.drafts.body
+    let group = req.body.drafts.group
+
+    db('drafts').insert({user_id, title, body, group}).returning('*')
     .then(record =>{
         console.log(record[0])
         res.json(record[0])
