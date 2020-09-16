@@ -9,15 +9,12 @@ let bodyParser = require('body-parser')
 let passport = require('passport')
 let requireAuth = passport.authenticate('jwt', {session: false})
 
-
 sgMail.setApiKey(apiKey)
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
 
-
 router.post('/compose', requireAuth, (req, res)=>{
-
 
     let body = req.body.send.body;
     let title = req.body.send.title;
@@ -38,15 +35,6 @@ router.post('/compose', requireAuth, (req, res)=>{
     })
 
     res.send("Email sent successfully!")
-
-
 })
-
-
-
-
-
-
-
 
 module.exports = router;
