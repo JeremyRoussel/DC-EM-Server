@@ -2,3 +2,5 @@
 .env
 /config/config.json
 config.js
+/sendgrid.env
+sendgrid.env
