@@ -93,11 +93,10 @@ router.put('/drafts', requireAuth, (req, res) =>{
     })
 })
 
-router.delete('./drafts', requireAuth, (req, res) =>{
+router.delete('/drafts/:id', requireAuth, (req, res) =>{
 
-    console.log(req.body)
-    let id = req.body.draftID
-    
+    // console.log(req.params.id)
+    let id = req.params.id
 
     db('drafts').where({id}).del().returning('*')
     .then(record =>{
