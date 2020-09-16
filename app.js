@@ -39,22 +39,23 @@ app.get('/hello', (req, res) => {
 app.use(require('./routes/contacts'))
 app.use(require('./routes/drafts'))
 app.use(require('./routes/sent'))
+app.use(require('./routes/compose'))
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-const msg = {
-  to: 'woodyconnell@gmail.com',
-  from: 'newsletter@megamailapp.com',
-  subject: 'Sending with Twilio SendGrid is Fun',
-  html: '<p>Hell yes</p>',
-};
+// const msg = {
+//   to: 'woodyconnell@gmail.com',
+//   from: 'newsletter@megamailapp.com',
+//   subject: 'Sending with Twilio SendGrid is Fun',
+//   html: '<p>Hell yes</p>',
+// };
 
-sgMail.send(msg).then(() => {
-  console.log('Message sent')
-}).catch((error) => {
-  console.log(error.response.body)
-  // console.log(error.response.body.errors[0].message)
-})
+// sgMail.send(msg).then(() => {
+//   console.log('Message sent')
+// }).catch((error) => {
+//   console.log(error.response.body)
+//   // console.log(error.response.body.errors[0].message)
+// })
 
 
 app.listen(PORT || 3001, () => {

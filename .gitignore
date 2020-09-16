@@ -4,3 +4,4 @@
 config.js
 /sendgrid.env
 sendgrid.env
+sgmail.js
