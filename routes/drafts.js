@@ -93,5 +93,20 @@ router.put('/drafts', requireAuth, (req, res) =>{
     })
 })
 
+router.delete('./drafts', requireAuth, (req, res) =>{
+
+    console.log(req.body)
+    let id = req.body.draftID
+    
+
+    db('drafts').where({id}).del().returning('*')
+    .then(record =>{
+        res.json(record)
+    })
+    .catch(error =>{
+        res.status(433).send({error: "Could not delete draft"})
+    })
+})
+
 
 module.exports = router;
