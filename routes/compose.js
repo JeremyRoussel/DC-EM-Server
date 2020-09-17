@@ -55,9 +55,8 @@ router.post('/compose', requireAuth, async (req, res)=>{
       console.log('Message sent')
 
       let response = await db('sent').insert({user_id, body, title, group}).returning('*')  
-      console.log(response[0])
       
-      res.json(response[0])
+      res.send("Sent")
     }
 
     catch {
