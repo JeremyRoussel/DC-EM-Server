@@ -9,21 +9,7 @@ let bodyParser = require('body-parser')
 let passport = require('passport')
 let requireAuth = passport.authenticate('jwt', {session: false})
 
-const HOST = process.env.HOST
-const USER = process.env.USER
-const PASSWORD = process.env.PASSWORD
-const DATABASE = process.env.DATABASE
-const SECRET = process.env.SECRET
-
-var db = require('knex')({
-    client: 'pg',
-    connection: {
-      host : HOST,
-      user : "eevaxebn",
-      password : PASSWORD,
-      database : DATABASE
-    }
-});
+var db = require('../db')
 
 sgMail.setApiKey(apiKey.apiKey)
 

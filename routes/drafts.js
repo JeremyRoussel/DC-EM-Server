@@ -4,23 +4,7 @@ let router = express.Router();
 
 let jwt = require('jwt-simple')
 
-let HOST = process.env.HOST;
-let USER = process.env.USER;
-let PASSWORD = process.env.PASSWORD;
-let DATABASE = process.env.DATABASE;
-let SECRET = process.env.SECRET;
-
-var db = require('knex')({
-    client: 'pg',
-    connection: {
-        host: HOST,
-        // MIGHT NEED TO CHANGE THIS ONE TO HARD-CODE!!! ***********************
-        user: "eevaxebn",
-        password: PASSWORD,
-        database: DATABASE
-    }
-})
-
+var db = require('../db')
 
 let bodyParser = require('body-parser');
 let bcrypt = require('bcryptjs');
