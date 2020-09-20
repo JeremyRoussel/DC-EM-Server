@@ -69,7 +69,7 @@ router.put('/drafts', requireAuth, (req, res) =>{
     // update({userID: userID, title: title, body: body, group: group}).
     db('drafts').where({id}).update({title, body, group}).returning('*')
     .then(record =>{
-        console.log(record)
+        console.log(`update response, record:`, record)
         res.json(record)
     })
     .catch(error =>{
@@ -84,6 +84,7 @@ router.delete('/drafts/:id', requireAuth, (req, res) =>{
 
     db('drafts').where({id}).del().returning('*')
     .then(record =>{
+        console.log(`update response, record: ${record}`)
         res.json(record)
     })
     .catch(error =>{
